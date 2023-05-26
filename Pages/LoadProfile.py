@@ -1,0 +1,2 @@
+class LoadProfile():
+    print("hi")
