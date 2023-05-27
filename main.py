@@ -19,10 +19,5 @@ while is_application_in_use:
     is_application_in_use = user_interface.main_menu_options()
 
 
-print()
-print("##################################################")
-print("#                                                #")
-print("#        Thank you for using inCollege           #")
-print("#                                                #")
-print("##################################################")
+
 

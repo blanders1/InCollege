@@ -43,4 +43,10 @@ class MainMenu:
 
     @staticmethod
     def exit():
-        return False
+        print()
+        print("##################################################")
+        print("#                                                #")
+        print("#        Thank you for using inCollege           #")
+        print("#                                                #")
+        print("##################################################")
+        return 0
