@@ -1,2 +1,0 @@
-class LoadProfile():
-    print("hi")

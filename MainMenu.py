@@ -1,28 +1,46 @@
-from Pages import LoadProfile
-from Pages import LoadConnections
-from Pages import LoadJobOpportunities
+from Pages import UserProfilePage as User
+from Pages import ConnectionsPage as Connect
+from Pages import JobOpportunitiesPage as Job
 
-# Comment to see if pushing is working
+
 class MainMenu:
-    @staticmethod
+    def __init__(self):
+        self.job_page = Job.JobOpportunitiesPage
+        self.connect_page = Connect.ConnectionsPage
+        self.user_page = User.UserProfilePage
+
     def invalid_response(self, invalid_selection):
         print(f"{invalid_selection} is not a valid option. Please only enter the number")
         print("next to the option you would like to navigate to.")
-        MainMenu.main_menu_options()
+        self.main_menu_options()
 
-    @staticmethod
-    def selected_menu_option(self, i):
-        switcher = {
-            1: LoadProfile.load_profile(),
-            2: LoadConnections.load_connections(),
-            3: LoadJobOpportunities.load_job_opportunities(),
-        }
-        return switcher.get(i, MainMenu.invalid_response(i));
+    def selected_menu_option(self, user_choice):
+        if user_choice == 1:
+            self.user_page.load_profile()
+            return True
+        elif user_choice == 2:
+            self.connect_page.load_connections()
+            return True
+        elif user_choice == 3:
+            self.job_page.load_job_opportunities()
+            return True
+        elif user_choice == 4:
+            return self.exit()
+        else:
+            self.invalid_response(user_choice)
+            return True
 
-    @staticmethod
     def main_menu_options(self):
-        print("1.) Your Profile")
-        print("2.) Your Connections")
-        print("3.) Job Opportunities")
-        choice = input("\nPlease enter where you would like to navigate: ")
-        MainMenu.selected_menu_option(choice)
+        while True:
+            print("1.) Your Profile")
+            print("2.) Your Connections")
+            print("3.) Job Opportunities")
+            print("\n4.) Exit")
+            choice = int(input("\nPlease enter where you would like to navigate: "))
+            is_exit = self.selected_menu_option(choice)
+
+            return is_exit
+
+    @staticmethod
+    def exit():
+        return False
