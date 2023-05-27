@@ -1,4 +1,5 @@
 # Imports
+from Util import db_helper as db
 
 
 class JobOpportunitiesPage:
