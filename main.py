@@ -3,8 +3,6 @@
 # Imported Files
 import MainMenu as Menu
 
-# Main loop, so application persists while in use
-
 print("##################################################")
 print("# Welcome to inCollege Command Line Environment  #")
 print("#                                                #")
