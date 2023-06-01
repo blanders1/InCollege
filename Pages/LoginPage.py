@@ -35,7 +35,6 @@ class Login:
         else:
             print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
             Menu.MainMenu().main_menu_options()
-
     def create_account(self):
         num_of_users = db.count_users()
         if num_of_users >= 5:
