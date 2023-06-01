@@ -51,6 +51,11 @@ class Login:
             print("\nSorry, this account already exists. Please try again\n")
             self.menu()
 
+        print("\nPassword Requirements:")
+        print("- Length cannot exceed 12. Length is greater than 7")
+        print("- Must include and uppercase letter")
+        print("- Must include a special character")
+        print("- Must include numbers")
         password = input("Password: ")
 
         while True:
