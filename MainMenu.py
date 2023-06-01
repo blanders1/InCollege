@@ -1,4 +1,4 @@
-from Pages import UserProfilePage as User
+from Pages import SkillsPage as Skills
 from Pages import ConnectionsPage as Connect
 from Pages import JobOpportunitiesPage as Job
 
@@ -7,7 +7,7 @@ class MainMenu:
     def __init__(self):
         self.job_page = Job.JobOpportunitiesPage
         self.connect_page = Connect.ConnectionsPage
-        self.user_page = User.UserProfilePage
+        self.skills_page = Skills.SkillsPage
 
     def invalid_response(self, invalid_selection):
         print(f"{invalid_selection} is not a valid option. Please only enter the number")
@@ -16,7 +16,7 @@ class MainMenu:
 
     def selected_menu_option(self, user_choice):
         if user_choice == 1:
-            self.user_page.load_profile()
+            self.skills_page.select_skill()
             return True
         elif user_choice == 2:
             self.connect_page.load_connections()
@@ -32,7 +32,7 @@ class MainMenu:
 
     def main_menu_options(self):
         while True:
-            print("1.) Your Profile")
+            print("1.) Your Skill Development")
             print("2.) Your Connections")
             print("3.) Job Opportunities")
             print("\n4.) Exit")

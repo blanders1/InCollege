@@ -1,5 +1,5 @@
 import sqlite3
-DB_CONNECTION = "InCollegeDB.db"
+DB_CONNECTION = "InCollegeDB"
 
 
 def db_connect():
@@ -18,42 +18,42 @@ def db_close(conn, cursor):
     conn.close()
 
 
-def add_user(name, email, phone_number):
+def add_user(username, password):
     conn, cursor = db_connect()
 
     # Execute a query to insert data into the table
-    insert_query = "INSERT INTO Users (Name, Email, PhoneNumber) VALUES (?, ?, ?)"
-    values = (name, email, phone_number)
+    insert_query = "INSERT INTO Users (Username, Password) VALUES (?, ?)"
+    values = (username, password)
     cursor.execute(insert_query, values)
 
     db_close(conn, cursor)
 
 
-def remove_user(user_id):
+def remove_user(username):
     conn, cursor = db_connect()
 
-    delete_query = "DELETE FROM Users WHERE id = ?"
-    values = (user_id,)
+    delete_query = "DELETE FROM Users WHERE username = ?"
+    values = (username,)
     cursor.execute(delete_query, values)
 
     db_close(conn, cursor)
 
 
-def edit_user(user_id, name, email, phone_number):
+def edit_user(username):
     conn, cursor = db_connect()
 
-    update_query = "UPDATE Users SET Name = ?, Email = ?, PhoneNumber = ? WHERE id = ?"
-    values = (name, email, phone_number, user_id)
+    update_query = "UPDATE Users SET Username = ? WHERE Username = ?"
+    values = (username, username)
     cursor.execute(update_query, values)
 
     db_close(conn, cursor)
 
 
-def get_user(user_id):
+def get_user(username):
     conn, cursor = db_connect()
 
-    select_query = "SELECT * FROM Users WHERE id = ?"
-    values = (user_id,)
+    select_query = "SELECT * FROM Users WHERE Username = ?"
+    values = (username,)
     cursor.execute(select_query, values)
 
     user = cursor.fetchone()
@@ -61,6 +61,19 @@ def get_user(user_id):
     db_close(conn, cursor)
 
     return user
+
+
+def count_users():
+    conn, cursor = db_connect()
+
+    count_query = "SELECT COUNT(*) FROM Users"
+    cursor.execute(count_query)
+
+    count = cursor.fetchone()[0]
+
+    db_close(conn, cursor)
+
+    return count
 
 
 def add_job(company, position, salary):
