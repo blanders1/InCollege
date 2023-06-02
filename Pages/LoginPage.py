@@ -60,7 +60,7 @@ class Login:
         while True:
             if len(password) < 8 or len(password) > 12:
                 password = input("Invalid password please try again: ")
-            elif not re.search(r'[A-Z]', password) or not re.search(r'\d', password):
+            elif not re.search(r'[A-Z]', password) or not re.search(r'\d', password) or not re.search(r'[ -\/:-@\[-`{-~]', password):
                 password = input("Invalid password please try again: ")
             else:
                 db.add_user(username, password)
