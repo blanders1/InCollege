@@ -43,7 +43,7 @@ class Login:
         if num_of_users >= 5:
             print("\n** WARNING **")
             print("We are not creating new accounts at this time. Please Sign in to existing account\n")
-            self.menu()
+            return self.menu()
 
         print("** Create Account **")
         username = input("Username: ")
@@ -51,22 +51,25 @@ class Login:
         user = db.get_user(username)
         if user is not None:
             print("\nSorry, this account already exists. Please try again\n")
-            self.menu()
-
+            return self.menu()
+        '''
         print("\nPassword Requirements:")
         print("- Length cannot exceed 12. Length is greater than 7")
         print("- Must include and uppercase letter")
         print("- Must include a special character")
         print("- Must include numbers")
+        '''
         password = input("Password: ")
 
         while True:
             if len(password) < 8 or len(password) > 12:
-                password = input("Invalid password please try again: ")
-            elif not re.search(r'[A-Z]', password) or not re.search(r'\d', password):
-                password = input("Invalid password please try again: ")
+                print("\nInvalid password please try again: ")
+                password = input("")
+            elif not re.search(r'[A-Z]', password) or not re.search(r'\d', password) or not re.search(r'[ -\/:-@\[-`{-~]', password):
+                print("\nInvalid password please try again: ")
+                password = input("")
             else:
                 db.add_user(username, password)
-                print("\nYour new account has been created thank you")
-                print("Try logging in\n")
-                self.sign_in()
+                print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
+                break
+        Menu.MainMenu().main_menu_options()

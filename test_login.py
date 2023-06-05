@@ -11,6 +11,7 @@ class TestMenu:
         self.menu = MainMenu.MainMenu()
         self.login = LoginPage.Login()
 
+    # Sign-in Functionality Unit Tests
     def test_sign_in_valid_credentials(self, monkeypatch, capsys, mocker):
         # Mocking input to simulate user interaction
         inputs = ["john", "Password123", "4"]
@@ -53,3 +54,90 @@ class TestMenu:
         captured = capsys.readouterr()
         assert "Invalid Password" in captured.out
 
+    def test_create_account_more_than_5_users(self, monkeypatch, capsys, mocker):
+
+        inputs = ["4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        # Run the create_account function
+        with mocker.patch.object(db, 'count_users', return_value=6):
+            self.login.create_account()
+
+        # Capture the output
+        captured = capsys.readouterr()
+
+        # Validate the output
+        assert "We are not creating new accounts at this time. Please Sign in to existing account" in captured.out
+
+
+    def test_create_account_existing_user(self, monkeypatch, capsys, mocker):
+        inputs = ["Robert Malloy", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        user = ["Robert Malloy", "password"]
+        with mocker.patch.object(db, 'get_user', return_value=user):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Sorry, this account already exists. Please try again" in captured.out
+
+
+    def test_create_account_invalid_pass_more_than_12_char(self, monkeypatch, capsys, mocker):
+        inputs = ["TestUserInvalid", "ThisIsAVeryLongPass!1", "ValidP@ss1", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        with mocker.patch.object(db, "add_user"):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Invalid password please try again: " in captured.out
+
+    def test_create_account_invalid_pass_less_than_8_char(self, monkeypatch, capsys, mocker):
+        inputs = ["TestUserInvalid", "Short1!", "ValidP@ss1", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        with mocker.patch.object(db, "add_user"):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Invalid password please try again: " in captured.out
+
+    def test_create_account_invalid_pass_all_lowercase(self, monkeypatch, capsys, mocker):
+        inputs = ["TestUserInvalid", "lowercase1!", "ValidP@ss1", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        with mocker.patch.object(db, "add_user"):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Invalid password please try again: " in captured.out
+
+    def test_create_account_invalid_pass_no_special_character(self, monkeypatch, capsys, mocker):
+        inputs = ["TestUserInvalid", "NoSpecial1", "ValidP@ss1", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        with mocker.patch.object(db, "add_user"):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Invalid password please try again: " in captured.out
+
+    def test_create_account_invalid_pass_no_numbers(self, monkeypatch, capsys, mocker):
+        inputs = ["TestUserInvalid", "NoNumbers!", "ValidP@ss1", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        with mocker.patch.object(db, "add_user"):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Invalid password please try again: " in captured.out
+
+    def test_create_account_valid(self, mocker, capsys, monkeypatch):
+        inputs = ["TestUserValid", "ValidP@ss1", "4"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        with mocker.patch.object(db, "add_user"):
+            self.login.create_account()
+
+        captured = capsys.readouterr()
+        assert "Sending you to the main menu navigation" in captured.out
