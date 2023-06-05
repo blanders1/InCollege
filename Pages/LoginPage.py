@@ -9,11 +9,14 @@ class Login:
         print("Please Login: ")
         print("1.) Sign In")
         print("2.) Create Account")
+        print("4.) Exit")
         option = int(input("Enter Option: "))
         if option == 1:
             self.sign_in()
         elif option == 2:
             self.create_account()
+        elif option == 4:
+            Menu.MainMenu().exit()
         else:
             print(f"{option} is not supported. Please try again")
             self.menu()
