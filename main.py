@@ -9,7 +9,6 @@ print("# Welcome to inCollege Command Line Environment  #")
 print("#                                                #")
 print("#        Developed By Team: New Mexico           #")
 print("##################################################")
-print("")
 
 is_application_in_use = True
 login_interface = Login.Login()

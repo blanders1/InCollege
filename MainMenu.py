@@ -25,7 +25,7 @@ class MainMenu:
             self.job_page.load_job_opportunities()
             return True
         elif user_choice == 4:
-            return self.exit()
+            return False
         else:
             self.invalid_response(user_choice)
             return True
@@ -38,8 +38,8 @@ class MainMenu:
             print("\n4.) Exit")
             choice = int(input("\nPlease enter where you would like to navigate: "))
             is_exit = self.selected_menu_option(choice)
-
-            return is_exit
+            if (choice == 4):
+                 return is_exit
 
     @staticmethod
     def exit():
