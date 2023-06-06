@@ -1,5 +1,4 @@
 from Util import db_helper as db
-from Util import session_info as account
 import MainMenu as Menu
 import re
 
@@ -37,6 +36,7 @@ class Login:
             self.menu()
         else:
             print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
+            db.add_current_user(username)
             Menu.MainMenu().main_menu_options()
     def create_account(self):
         num_of_users = db.count_users()
@@ -46,6 +46,8 @@ class Login:
             return self.menu()
 
         print("** Create Account **")
+        first_name = input("First Name: ")
+        last_name = input("Last Name: ")
         username = input("Username: ")
 
         user = db.get_user(username)
@@ -69,7 +71,8 @@ class Login:
                 print("\nInvalid password please try again: ")
                 password = input("")
             else:
-                db.add_user(username, password)
+                db.add_user(first_name, last_name ,username, password)
+                db.add_current_user(username)
                 print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
                 break
         Menu.MainMenu().main_menu_options()

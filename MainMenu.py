@@ -1,6 +1,7 @@
 from Pages import SkillsPage as Skills
 from Pages import ConnectionsPage as Connect
 from Pages import JobOpportunitiesPage as Job
+from Util import db_helper as db
 
 
 class MainMenu:
@@ -19,10 +20,10 @@ class MainMenu:
             self.skills_page.select_skill()
             return True
         elif user_choice == 2:
-            self.connect_page.load_connections()
+            self.connect_page().load_connections()
             return True
         elif user_choice == 3:
-            self.job_page.load_job_opportunities()
+            self.job_page().load_job_opportunities()
             return True
         elif user_choice == 4:
             return self.exit()
@@ -43,6 +44,7 @@ class MainMenu:
 
     @staticmethod
     def exit():
+        db.remove_current_user()
         print()
         print("##################################################")
         print("#                                                #")

@@ -18,19 +18,13 @@ def db_close(conn, cursor):
     conn.close()
 
 
-def add_user(username, password, is_mock=False):
+def add_user(first_name, last_name, username, password):
     conn, cursor = db_connect()
 
-    if is_mock:
-        insert_query = "INSERT INTO MOCK_USERS (Username, Password) VALUES (?, ?)"
-        values = (username, password)
-        cursor.execute(insert_query, values)
-
-    else:
-        # Execute a query to insert data into the table
-        insert_query = "INSERT INTO Users (Username, Password) VALUES (?, ?)"
-        values = (username, password)
-        cursor.execute(insert_query, values)
+    # Execute a query to insert data into the table
+    insert_query = "INSERT INTO Users (First_Name, Last_Name, Username, Password) VALUES (?, ?, ?, ?)"
+    values = (first_name, last_name, username, password)
+    cursor.execute(insert_query, values)
 
     db_close(conn, cursor)
 
@@ -65,21 +59,28 @@ def edit_user(username, is_mock=False):
     db_close(conn, cursor)
 
 
-def get_user(username, is_mock=False):
+def get_user(username):
     conn, cursor = db_connect()
 
-    if is_mock:
-        select_query = "SELECT * FROM MOCK_USERS WHERE Username = ?"
-        values = (username,)
-        cursor.execute(select_query, values)
+    select_query = "SELECT * FROM Users WHERE Username = ?"
+    values = (username,)
+    cursor.execute(select_query, values)
 
-        user = cursor.fetchone()
-    else:
-        select_query = "SELECT * FROM Users WHERE Username = ?"
-        values = (username,)
-        cursor.execute(select_query, values)
+    user = cursor.fetchone()
 
-        user = cursor.fetchone()
+    db_close(conn, cursor)
+
+    return user
+
+
+def get_user_by_name(first_name, last_name):
+    conn, cursor = db_connect()
+
+    select_query = "SELECT * FROM Users WHERE First_Name = ? AND Last_Name = ?"
+    values = (first_name, last_name)
+    cursor.execute(select_query, values)
+
+    user = cursor.fetchone()
 
     db_close(conn, cursor)
 
@@ -105,12 +106,13 @@ def count_users(is_mock=False):
     return count
 
 
-def add_job(company, position, salary):
+def add_job(title, description, employer, location, salary, created_by):
     conn, cursor = db_connect()
 
     # Execute a query to insert data into the table
-    insert_query = "INSERT INTO Jobs (Company, Position, Salary) VALUES (?, ?, ?)"
-    values = (company, position, salary)
+    insert_query = \
+        "INSERT INTO Jobs (Title, Description, Employer, Location, Salary, Created_By) VALUES (?, ?, ?, ?, ?, ?)"
+    values = (title, description, employer, location, salary, created_by)
     cursor.execute(insert_query, values)
 
     db_close(conn, cursor)
@@ -148,3 +150,49 @@ def get_job(job_id):
     db_close(conn, cursor)
 
     return job
+
+
+def count_jobs():
+    conn, cursor = db_connect()
+
+    count_query = "SELECT COUNT(*) FROM Jobs"
+    cursor.execute(count_query)
+
+    count = cursor.fetchone()[0]
+
+    db_close(conn, cursor)
+
+    return count
+
+
+def add_current_user(username):
+    conn, cursor = db_connect()
+
+    # Execute a query to insert data into the table
+    insert_query = "INSERT INTO CurrentUser (Username) VALUES (?)"
+    values = (username,)
+    cursor.execute(insert_query, values)
+
+    db_close(conn, cursor)
+
+
+def remove_current_user():
+    conn, cursor = db_connect()
+
+    delete_query = "DELETE FROM CurrentUser"
+    cursor.execute(delete_query)
+
+    db_close(conn, cursor)
+
+
+def get_current_user():
+    conn, cursor = db_connect()
+
+    select_query = "SELECT * FROM CurrentUser"
+    cursor.execute(select_query)
+
+    user = cursor.fetchone()
+
+    db_close(conn, cursor)
+
+    return user
