@@ -1,4 +1,4 @@
-class Skills4Page:
+class TeamworkPage:
     @staticmethod
-    def load_skill_4():
+    def load_teamwork():
         print("under constructions")
