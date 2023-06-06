@@ -2,6 +2,7 @@
 
 # Imported Files
 import MainMenu as Menu
+from Pages import LoginPage as Login
 
 print("##################################################")
 print("# Welcome to inCollege Command Line Environment  #")
@@ -11,11 +12,12 @@ print("##################################################")
 print("")
 
 is_application_in_use = True
-user_interface = Menu.MainMenu()
+login_interface = Login.Login()
+exit_screen = Menu.MainMenu()
 
 while is_application_in_use:
-    is_application_in_use = user_interface.main_menu_options()
+    is_application_in_use = login_interface.menu()
 
-
+exit_screen.exit()
 
 

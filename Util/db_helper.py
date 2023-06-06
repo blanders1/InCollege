@@ -1,5 +1,5 @@
 import sqlite3
-DB_CONNECTION = "InCollegeDB.db"
+DB_CONNECTION = "InCollegeDB"
 
 
 def db_connect():
@@ -18,49 +18,91 @@ def db_close(conn, cursor):
     conn.close()
 
 
-def add_user(name, email, phone_number):
+def add_user(username, password, is_mock=False):
     conn, cursor = db_connect()
 
-    # Execute a query to insert data into the table
-    insert_query = "INSERT INTO Users (Name, Email, PhoneNumber) VALUES (?, ?, ?)"
-    values = (name, email, phone_number)
-    cursor.execute(insert_query, values)
+    if is_mock:
+        insert_query = "INSERT INTO MOCK_USERS (Username, Password) VALUES (?, ?)"
+        values = (username, password)
+        cursor.execute(insert_query, values)
+
+    else:
+        # Execute a query to insert data into the table
+        insert_query = "INSERT INTO Users (Username, Password) VALUES (?, ?)"
+        values = (username, password)
+        cursor.execute(insert_query, values)
 
     db_close(conn, cursor)
 
 
-def remove_user(user_id):
+def remove_user(username, is_mock=False):
     conn, cursor = db_connect()
 
-    delete_query = "DELETE FROM Users WHERE id = ?"
-    values = (user_id,)
-    cursor.execute(delete_query, values)
+    if is_mock:
+        delete_query = "DELETE FROM MOCK_USERS WHERE username = ?"
+        values = (username,)
+        cursor.execute(delete_query, values)
+    else:
+        delete_query = "DELETE FROM Users WHERE username = ?"
+        values = (username,)
+        cursor.execute(delete_query, values)
 
     db_close(conn, cursor)
 
 
-def edit_user(user_id, name, email, phone_number):
+def edit_user(username, is_mock=False):
     conn, cursor = db_connect()
 
-    update_query = "UPDATE Users SET Name = ?, Email = ?, PhoneNumber = ? WHERE id = ?"
-    values = (name, email, phone_number, user_id)
-    cursor.execute(update_query, values)
+    if is_mock:
+        update_query = "UPDATE MOCK_USERS SET Username = ? WHERE Username = ?"
+        values = (username, username)
+        cursor.execute(update_query, values)
+    else:
+        update_query = "UPDATE Users SET Username = ? WHERE Username = ?"
+        values = (username, username)
+        cursor.execute(update_query, values)
 
     db_close(conn, cursor)
 
 
-def get_user(user_id):
+def get_user(username, is_mock=False):
     conn, cursor = db_connect()
 
-    select_query = "SELECT * FROM Users WHERE id = ?"
-    values = (user_id,)
-    cursor.execute(select_query, values)
+    if is_mock:
+        select_query = "SELECT * FROM MOCK_USERS WHERE Username = ?"
+        values = (username,)
+        cursor.execute(select_query, values)
 
-    user = cursor.fetchone()
+        user = cursor.fetchone()
+    else:
+        select_query = "SELECT * FROM Users WHERE Username = ?"
+        values = (username,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
 
     db_close(conn, cursor)
 
     return user
+
+
+def count_users(is_mock=False):
+    conn, cursor = db_connect()
+
+    if is_mock:
+        count_query = "SELECT COUNT(*) FROM MOCK_USERS"
+        cursor.execute(count_query)
+
+        count = cursor.fetchone()[0]
+    else:
+        count_query = "SELECT COUNT(*) FROM Users"
+        cursor.execute(count_query)
+
+        count = cursor.fetchone()[0]
+
+    db_close(conn, cursor)
+
+    return count
 
 
 def add_job(company, position, salary):
