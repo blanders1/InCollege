@@ -12,7 +12,7 @@ class TestNavigation:
         self.login = LoginPage.Login()
 
     def test_navigation_to_job_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "3"]
+        inputs = ["john", "Password123", "3", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
@@ -25,7 +25,7 @@ class TestNavigation:
         assert "under construction" in captured.out
 
     def test_navigation_to_connections_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "2"]
+        inputs = ["john", "Password123", "2", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
@@ -51,7 +51,7 @@ class TestNavigation:
         assert "Please Select a Skill" in captured.out
 
     def test_navigation_to_skill1_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "1", "1"]
+        inputs = ["john", "Password123", "1", "1", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
@@ -64,7 +64,7 @@ class TestNavigation:
         assert "under construction" in captured.out
 
     def test_navigation_to_skill2_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "1", "2"]
+        inputs = ["john", "Password123", "1", "2", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
@@ -77,7 +77,7 @@ class TestNavigation:
         assert "under construction" in captured.out
 
     def test_navigation_to_skill3_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "1", "3"]
+        inputs = ["john", "Password123", "1", "3", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
@@ -90,7 +90,7 @@ class TestNavigation:
         assert "under construction" in captured.out
 
     def test_navigation_to_skill4_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "1", "4"]
+        inputs = ["john", "Password123", "1", "4", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
@@ -103,7 +103,7 @@ class TestNavigation:
         assert "under construction" in captured.out
 
     def test_navigation_to_skill5_page(self, monkeypatch, capsys, mocker):
-        inputs = ["john", "Password123", "1", "5"]
+        inputs = ["john", "Password123", "1", "5", "4"]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
