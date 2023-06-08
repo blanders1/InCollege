@@ -38,5 +38,5 @@ class JobOpportunitiesPage:
         user = db.get_current_user()
 
         db.add_job(title, description, employer, location, salary, user[0])
-        print("Job Added")
+        print("* Job Added *")
         self.load_job_opportunities()

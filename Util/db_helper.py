@@ -138,11 +138,11 @@ def edit_job(job_id, company, position, salary):
     db_close(conn, cursor)
 
 
-def get_job(job_id):
+def get_job(title, employer):
     conn, cursor = db_connect()
 
-    select_query = "SELECT * FROM Jobs WHERE id = ?"
-    values = (job_id,)
+    select_query = "SELECT * FROM Jobs WHERE Title = ? AND Employer = ?"
+    values = (title, employer)
     cursor.execute(select_query, values)
 
     job = cursor.fetchone()
