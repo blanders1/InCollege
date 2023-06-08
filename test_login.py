@@ -142,4 +142,4 @@ class TestMenu:
         captured = capsys.readouterr()
         assert "Sending you to the main menu navigation" in captured.out
 
-    print("testing")
+    print("double testing")
