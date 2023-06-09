@@ -38,6 +38,7 @@ class Login:
         else:
             print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
             Menu.MainMenu().main_menu_options()
+
     def create_account(self):
         num_of_users = db.count_users()
         if num_of_users >= 5:
@@ -69,7 +70,10 @@ class Login:
                 print("\nInvalid password please try again: ")
                 password = input("")
             else:
-                db.add_user(username, password)
+                first_name = input("First name: ")
+                last_name = input("Last name: ")
+                db.add_user(username, password, first_name, last_name)
                 print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
                 break
+
         Menu.MainMenu().main_menu_options()

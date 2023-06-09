@@ -18,18 +18,18 @@ def db_close(conn, cursor):
     conn.close()
 
 
-def add_user(username, password, is_mock=False):
+def add_user(username, password, first_name, last_name, is_mock=False):
     conn, cursor = db_connect()
 
     if is_mock:
-        insert_query = "INSERT INTO MOCK_USERS (Username, Password) VALUES (?, ?)"
-        values = (username, password)
+        insert_query = "INSERT INTO MOCK_USERS (Username, Password, first_name, last_name) VALUES (?, ?, ?, ?)"
+        values = (username, password, first_name, last_name)
         cursor.execute(insert_query, values)
 
     else:
         # Execute a query to insert data into the table
-        insert_query = "INSERT INTO Users (Username, Password) VALUES (?, ?)"
-        values = (username, password)
+        insert_query = "INSERT INTO Users (Username, Password, first_name, last_name) VALUES (?, ?, ?, ?)"
+        values = (username, password, first_name, last_name)
         cursor.execute(insert_query, values)
 
     db_close(conn, cursor)
