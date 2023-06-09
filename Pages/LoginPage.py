@@ -84,7 +84,15 @@ class Login:
             else:
                 first_name = input("First name: ")
                 last_name = input("Last name: ")
-                db.add_user(username, password, first_name, last_name)
+                while True:
+                    check = db.check_name(first_name.lower(), last_name.lower())
+                    if check:
+                        print("This person already exists in our system. Please make a new name.")
+                        first_name = input("First name:")
+                        last_name = input("Last name: ")
+                    else:
+                        break
+                db.add_user(username, password, first_name.lower(), last_name.lower())
                 print(f"\nWelcome {username}! Sending you to the main menu navigation.\n")
                 break
 

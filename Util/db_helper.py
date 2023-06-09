@@ -85,6 +85,72 @@ def get_user(username, is_mock=False):
 
     return user
 
+def check_name(firstname, last_name, is_mock=False):
+    conn, cursor = db_connect()
+
+    if is_mock:
+        select_query = "SELECT * FROM MOCK_USERS WHERE first_name = ?"
+        values = (firstname,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
+    else:
+        select_query = "SELECT * FROM Users WHERE first_name = ?"
+        values = (firstname,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
+        if user is not None:
+            if user[3] == last_name:
+                flag = True     #First name corresponds with last name and its in table
+            else:
+                flag = False    #First and last name do not correspond or name is not in table
+        else:
+            flag = False
+    db_close(conn, cursor)
+
+    return flag
+
+def get_first_name(firstname, is_mock=False):
+    conn, cursor = db_connect()
+
+    if is_mock:
+        select_query = "SELECT * FROM MOCK_USERS WHERE first_name = ?"
+        values = (firstname,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
+    else:
+        select_query = "SELECT * FROM Users WHERE first_name = ?"
+        values = (firstname,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
+
+    db_close(conn, cursor)
+
+    return user
+
+def get_last_name(lastname, is_mock=False):
+    conn, cursor = db_connect()
+
+    if is_mock:
+        select_query = "SELECT * FROM MOCK_USERS WHERE last_name = ?"
+        values = (lastname,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
+    else:
+        select_query = "SELECT * FROM Users WHERE last_name = ?"
+        values = (lastname,)
+        cursor.execute(select_query, values)
+
+        user = cursor.fetchone()
+
+    db_close(conn, cursor)
+
+    return user
+
 
 def count_users(is_mock=False):
     conn, cursor = db_connect()
