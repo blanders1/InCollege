@@ -1,16 +1,30 @@
 # Imports
 from Util import db_helper as db
 import MainMenu as menu
+from Pages import LoginPage as login
 
 class JobOpportunitiesPage:
     @staticmethod
+
     def load_job_opportunities():
         print("1.) Post a job")
         print("9.) Main menu")
-        choice = int(input("Please enter a skill you would like to work on: "))
+        choice = int(input("Please enter an option: "))
         if choice == 1:
-            self.post_job()
+            JobOpportunitiesPage.post_job()
         elif choice == 9:
             return menu.MainMenu.main_menu_options
-    def post_job(self):
-        print ("under construction")
+        else:
+            print("Please try again \n")
+    def post_job():
+        if (db.count_jobs() >= 5):
+            print("Number of jobs permitted exceeded, going back to main menu\n")
+            return menu.MainMenu.main_menu_options
+        title = input("What is the title of the job? ")
+        description = input("Give a description of the job ")
+        employer = input("Who is the employer of the job? ")
+        location = input("Where is the location of the job? ")
+        salary = input("What is the yearly salary of the job? ")    
+        db.add_job(title, description, employer, location, salary)
+        job_poster = db.get_user(login.username)[2]
+        

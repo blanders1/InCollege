@@ -105,12 +105,12 @@ def count_users(is_mock=False):
     return count
 
 
-def add_job(company, position, salary):
+def add_job(title, description, employer, location, salary):
     conn, cursor = db_connect()
 
     # Execute a query to insert data into the table
-    insert_query = "INSERT INTO Jobs (Company, Position, Salary) VALUES (?, ?, ?)"
-    values = (company, position, salary)
+    insert_query = "INSERT INTO Jobs (Title, Description, Employer, Location, Salary) VALUES (?, ?, ?, ?, ?)"
+    values = (title, description, employer, location, salary)
     cursor.execute(insert_query, values)
 
     db_close(conn, cursor)
@@ -148,3 +148,21 @@ def get_job(job_id):
     db_close(conn, cursor)
 
     return job
+
+def count_jobs(is_mock=False):
+    conn, cursor = db_connect()
+
+    if is_mock:
+        count_query = "SELECT COUNT(*) FROM MOCK_JOBS"
+        cursor.execute(count_query)
+
+        count = cursor.fetchone()[0]
+    else:
+        count_query = "SELECT COUNT(*) FROM Jobs"
+        cursor.execute(count_query)
+
+        count = cursor.fetchone()[0]
+
+    db_close(conn, cursor)
+
+    return count
