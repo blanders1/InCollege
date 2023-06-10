@@ -18,16 +18,19 @@ class Login:
         print("Welcome to InCollege: ")
         print("1.) Sign In")
         print("2.) Create Account")
-        print("3.) Why should you join InCollege?")
-        print("4.) Exit")
+        print("3.) Search for someone you know")
+        print("4.) Why should you join InCollege?")
+        print("5.) Exit")
         option = int(input("Enter Option: "))
         if option == 1:
             self.sign_in()
         elif option == 2:
             self.create_account()
-        elif option ==3:
+        elif option == 3:
+            self.search()
+        elif option ==5:
             self.play_video()
-        elif option == 4:
+        elif option == 5:
             Menu.MainMenu().exit()
         else:
             print(f"{option} is not supported. Please try again")
@@ -104,3 +107,58 @@ class Login:
         print("* Video is now playing *")
         print("************************")
         return self.menu()
+
+    def search(self):
+        print("\nWould you like to search for someone you know?")
+        print("1.) Yes ")
+        print("2.) No return to previous")
+
+        choice = int(input("Please enter 1 or 2: "))
+        while True:
+                if choice != 1 and choice !=2:
+                    choice = int(input("Invalid input please enter 1 or 2: "))
+                else:
+                    break
+        
+        if choice == 1:
+            first_name = input("\nPlease enter their first name: ")
+            last_name = input("Please enter their last name: ")
+            user = db.check_name(first_name.lower(), last_name.lower())
+            if user:
+                print("\nThey are part of the InCollege system\n")
+                print("Would you like to join your friends on InCollege\n")
+                print("1.) Yes I would like to login or sign up")
+                print("2.) No Return to previous page")
+                opt = int(input("Please enter 1 or 2: "))
+                while True:
+                        if opt != 1 and opt !=2:
+                            opt = int(input("Invalid input please enter 1 or 2: "))
+                        else:
+                            break
+                if opt == 1:
+                    print("1.) Sign In")
+                    print("2.) Create Account")
+                    print("3.) Return to previous page")
+                    option = int(input("Enter option: "))
+                    while True:
+                        if option != 1 and option !=2 and option != 3:
+                            option = int(input("Invalid input please enter 1, 2, or 3: "))
+                        else:
+                            break
+                    if option == 1:
+                        self.sign_in()
+                    elif option == 2:
+                        self.create_account()
+                    elif option == 3:
+                        self.search()
+
+                    
+                elif opt == 2:
+                    return self.search()
+            else:
+                print("\nThey are not yet a part of the InCollege system yet\n")
+                return self.search()
+        
+        elif choice == 2:
+            return self.menu()
+
