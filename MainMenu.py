@@ -12,7 +12,6 @@ class MainMenu:
     def invalid_response(self, invalid_selection):
         print(f"{invalid_selection} is not a valid option. Please only enter the number")
         print("next to the option you would like to navigate to.")
-        self.main_menu_options()
 
     def selected_menu_option(self, user_choice):
         if user_choice == 1:
@@ -34,7 +33,7 @@ class MainMenu:
         while True:
             print("1.) Your Skill Development")
             print("2.) Your Connections")
-            print("3.) Job Opportunities")
+            print("3.) Job/Internship Opportunities")
             print("\n4.) Exit")
             choice = int(input("\nPlease enter where you would like to navigate: "))
             is_exit = self.selected_menu_option(choice)

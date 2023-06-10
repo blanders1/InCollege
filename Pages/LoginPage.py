@@ -3,8 +3,8 @@ from Util import session_info as account
 import MainMenu as Menu
 import re
 
-
 class Login:
+    
     def menu(self):
         print("##################################################")
         print("# \"When I had just graduated, I had a hard time  #")
@@ -35,6 +35,7 @@ class Login:
 
     def sign_in(self):
         print("** Sign-In **")
+        global username #username is global so it can be accessed from other functions
         username = input("Username: ")
         password = input("Password: ")
 
@@ -99,4 +100,7 @@ class Login:
         Menu.MainMenu().main_menu_options()
 
     def play_video(self):
-        print("Video is now playing")
+        print("************************")
+        print("* Video is now playing *")
+        print("************************")
+        return self.menu()
