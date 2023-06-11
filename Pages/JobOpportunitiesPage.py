@@ -4,14 +4,12 @@ import MainMenu as menu
 from Pages import LoginPage as login
 
 class JobOpportunitiesPage:
-    @staticmethod
-
-    def load_job_opportunities():
+    def load_job_opportunities(self):
         print("1.) Post a job")
         print("9.) Main menu")
         choice = int(input("Please enter an option: "))
         if choice == 1:
-            JobOpportunitiesPage.post_job()
+            self.post_job()
         elif choice == 9:
             return menu.MainMenu.main_menu_options
         else:
@@ -24,7 +22,7 @@ class JobOpportunitiesPage:
         description = input("Give a description of the job ")
         employer = input("Who is the employer of the job? ")
         location = input("Where is the location of the job? ")
-        salary = input("What is the yearly salary of the job? ")    
-        db.add_job(title, description, employer, location, salary)
-        job_poster = db.get_user(login.username)[2]
-        
+        salary = input("What is the yearly salary of the job? ")
+        created_by = db.get_user(login.username)[0]    
+        db.add_job(title, description, employer, location, salary, created_by)
+        self.load_job_opportunities()
