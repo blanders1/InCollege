@@ -16,7 +16,7 @@ class JobOpportunitiesPage:
             return menu.MainMenu.main_menu_options
         else:
             print("Please try again \n")
-    def post_job():
+    def post_job(self):
         if (db.count_jobs() >= 5):
             print("Number of jobs permitted exceeded, going back to main menu\n")
             return menu.MainMenu.main_menu_options
