@@ -3,35 +3,59 @@ from Util import session_info as account
 import MainMenu as Menu
 import re
 
+from Pages.Useful import BrowseInCollegePage as Browse, DirectoriesPage as Directory, GeneralPage as General, BusinessSolutionsPage as Business
+from Pages.InCollegeImportant import AccessibilityPage as Accessibility, BrandPolicyPage as Brand, CopyrightPage as Copyright, UserAgreementPage as UserAgreement, CookiePolicyPage as Cookie
+
 class Login:
     
     def menu(self):
-        print("##################################################")
-        print("# \"When I had just graduated, I had a hard time  #")
-        print("# trying to get companies to accept me withe no  #")
-        print("# experience, but thanks to InCollege, I learned #")
-        print("# skills that employers wanted, and was able to  #")
-        print("# connect with them. I recommend InCollge to all #")
-        print("# students in college that want to get hired as  #")
-        print("# soon as they graduate.\"                        #")
-        print("##################################################")
-        print("Welcome to InCollege: ")
-        print("1.) Sign In")
-        print("2.) Create Account")
-        print("3.) Search for someone you know")
-        print("4.) Why should you join InCollege?")
-        print("5.) Exit")
+        print("\n** Log-in Page **\n")
+        print("#"*100)
+        print("# \"When I had just graduated, I had a hard time  trying to get companies to accept me withe no     #")
+        print("# experience, but thanks to InCollege, I learned skills that employers wanted, and was able to     #")
+        print("# connect with them. I recommend InCollege to all students in college that want to get hired as    #")
+        print("# soon as they graduate.\"                                                                          #")
+        print("#"*100)
+        self.print_menu()
         option = int(input("Enter Option: "))
-        if option == 1:
+        if option == 11:
             self.sign_in()
-        elif option == 2:
+        elif option == 12:
             self.create_account()
-        elif option == 3:
+        elif option == 13:
             self.search()
-        elif option == 4:
+        elif option == 14:
             self.play_video()
-        elif option == 5:
+        elif option == 15:
             Menu.MainMenu().exit()
+
+        elif option == 21:
+            General.GeneralPage().menu()
+        elif option == 22:
+            Browse.BrowseInCollegePage().menu()
+        elif option == 23:
+            Business.BusinessSolutionsPage().menu()
+        elif option == 24:
+            Directory.DirectoriesPage().menu()
+
+        elif option == 31:
+            self.print_menu()
+        elif option == 32:
+            self.print_menu()
+        elif option == 33:
+            Accessibility.AccessibilityPage().menu()
+        elif option == 34:
+            UserAgreement.UserAgreementPage().menu()
+        elif option == 35:
+            Cookie.CookiePolicyPage().menu()
+        elif option == 36:
+            self.print_menu()
+        elif option == 37:
+            Brand.BrandPolicyPage().menu()
+        elif option == 38:
+            self.print_menu()
+        elif option == 39:
+            self.print_menu()
         else:
             print(f"{option} is not supported. Please try again")
             self.menu()
@@ -162,3 +186,20 @@ class Login:
         elif choice == 2:
             return self.menu()
 
+    def print_menu(self):
+        column_width = 31
+        print("\n")
+        menu = [["Log In Page Options", "Useful Links", "Important InCollege Links"],
+                ["="*column_width, "="*column_width, "="*column_width],
+                ["11.) Sign In", "21.) General", "31.) Copyright Notice"],
+                ["12.) Create Account", "22.) Browse InCollege", "32.) About"],
+                ["13.) Search for people you know", "23.) Business Solutions", "33.) Accessibility"],
+                ["14.) Why join InCollege?", "24.) Directories", "34.) User Agreement"],
+                ["15.) Exit", "", "35.) Cookie Policy"],
+                ["", "", "36.) Copyright Policy"],
+                ["", "", "37.) Brand Policy"],
+                ["", "", "38.) Privacy Policy"],
+                ["", "", "39.) Language Settings"], ]
+        for row in menu:
+            print("{:<31} | {:<31} | {:<31} ".format(*row))
+        print("\n")
