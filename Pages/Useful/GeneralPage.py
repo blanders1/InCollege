@@ -1,4 +1,4 @@
-from General import AboutPage as About, HelpCenterPage as Help, PressPage as Press, BlogPage as Blog, \
+from Pages.Useful.General import AboutPage as About, HelpCenterPage as Help, PressPage as Press, BlogPage as Blog, \
     CareersPage as Career, DevelopmentPage as Developer
 from Pages import LoginPage
 

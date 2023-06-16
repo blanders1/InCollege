@@ -184,7 +184,7 @@ def count_jobs():
     return count
 
 
-def db_toggle_sms(username, toggle):
+def toggle_sms(username, toggle):
     conn, cursor = db_connect()
 
     update_query = "UPDATE Users SET SMSEnabled = ? WHERE Username = ?"
@@ -194,7 +194,7 @@ def db_toggle_sms(username, toggle):
     db_close(conn, cursor)
 
 
-def db_toggle_email(username, toggle):
+def toggle_email(username, toggle):
     conn, cursor = db_connect()
 
     update_query = "UPDATE Users SET EmailEnabled = ? WHERE Username = ?"
@@ -204,7 +204,7 @@ def db_toggle_email(username, toggle):
     db_close(conn, cursor)
 
 
-def db_toggle_advertising(username, toggle):
+def toggle_advertising(username, toggle):
     conn, cursor = db_connect()
 
     update_query = "UPDATE Users SET AdvertisingEnabled = ? WHERE Username = ?"
@@ -214,7 +214,7 @@ def db_toggle_advertising(username, toggle):
     db_close(conn, cursor)
 
 
-def db_change_language(username, language):
+def change_language(username, language):
     conn, cursor = db_connect()
 
     update_query = "UPDATE Users SET Language = ? WHERE Username = ?"

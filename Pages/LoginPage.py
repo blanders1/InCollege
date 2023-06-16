@@ -11,7 +11,9 @@ from Pages.InCollegeImportant import AccessibilityPage as Accessibility,\
     LanguagePage as Lang, PrivacyPage as Privacy
 
 class Login:
-    
+    global username
+    username = ""
+
     def menu(self):
         print("\n** Log-in Page **\n")
         print("#"*100)
@@ -37,29 +39,41 @@ class Login:
             General.GeneralPage().menu()
         elif option == 22:
             Browse.BrowseInCollegePage().menu()
+            self.menu()
         elif option == 23:
             Business.BusinessSolutionsPage().menu()
+            self.menu()
         elif option == 24:
-            Directory.DirectoriesPage().menu()
 
+            Directory.DirectoriesPage().menu()
+            self.menu()
         elif option == 31:
             Copyright.CopyrightPage().menu()
+            self.menu()
         elif option == 32:
             About.AboutPage().menu()
+            self.menu()
         elif option == 33:
             Accessibility.AccessibilityPage().menu()
+            self.menu()
         elif option == 34:
             UserAgreement.UserAgreementPage().menu()
+            self.menu()
         elif option == 35:
             Cookie.CookiePolicyPage().menu()
+            self.menu()
         elif option == 36:
             CopyPolicy.CopyrightPolicyPage().menu()
+            self.menu()
         elif option == 37:
             Brand.BrandPolicyPage().menu()
+            self.menu()
         elif option == 38:
             Privacy.PrivacyPolicyPage().menu()
+            self.menu()
         elif option == 39:
             Lang.LanguagePage().menu()
+            self.menu()
         else:
             print(f"\n{option} is not supported. Please try again\n")
             self.menu()
@@ -91,6 +105,7 @@ class Login:
             return self.menu()
 
         print("** Create Account **")
+        global username
         username = input("Username: ")
 
         user = db.get_user(username)
@@ -193,7 +208,7 @@ class Login:
     def print_menu(self):
         column_width = 31
         print("\n")
-        menu = [["Log In Page Options", "Useful Links", "Important InCollege Links"],
+        menu = [["Main Menu Options", "Useful Links", "Important InCollege Links"],
                 ["="*column_width, "="*column_width, "="*column_width],
                 ["11.) Sign In", "21.) General", "31.) Copyright Notice"],
                 ["12.) Create Account", "22.) Browse InCollege", "32.) About"],
