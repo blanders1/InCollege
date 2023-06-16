@@ -222,3 +222,4 @@ def change_language(username, language):
     cursor.execute(update_query, values)
 
     db_close(conn, cursor)
+
