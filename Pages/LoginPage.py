@@ -61,7 +61,7 @@ class Login:
         elif option == 39:
             Lang.LanguagePage().menu()
         else:
-            print(f"{option} is not supported. Please try again")
+            print(f"\n{option} is not supported. Please try again\n")
             self.menu()
 
     def sign_in(self):
