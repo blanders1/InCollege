@@ -4,7 +4,11 @@ import MainMenu as Menu
 import re
 
 from Pages.Useful import BrowseInCollegePage as Browse, DirectoriesPage as Directory, GeneralPage as General, BusinessSolutionsPage as Business
-from Pages.InCollegeImportant import AccessibilityPage as Accessibility, BrandPolicyPage as Brand, CopyrightPage as Copyright, UserAgreementPage as UserAgreement, CookiePolicyPage as Cookie
+from Pages.InCollegeImportant import AccessibilityPage as Accessibility,\
+    BrandPolicyPage as Brand, CopyrightPage as Copyright, \
+    UserAgreementPage as UserAgreement, CookiePolicyPage as Cookie, \
+    CopyrightPolicyPage as CopyPolicy, About as About, \
+    LanguagePage as Lang, PrivacyPage as Privacy
 
 class Login:
     
@@ -39,9 +43,9 @@ class Login:
             Directory.DirectoriesPage().menu()
 
         elif option == 31:
-            self.print_menu()
+            Copyright.CopyrightPage().menu()
         elif option == 32:
-            self.print_menu()
+            About.AboutPage().menu()
         elif option == 33:
             Accessibility.AccessibilityPage().menu()
         elif option == 34:
@@ -49,13 +53,13 @@ class Login:
         elif option == 35:
             Cookie.CookiePolicyPage().menu()
         elif option == 36:
-            self.print_menu()
+            CopyPolicy.CopyrightPolicyPage().menu()
         elif option == 37:
             Brand.BrandPolicyPage().menu()
         elif option == 38:
-            self.print_menu()
+            Privacy.PrivacyPolicyPage().menu()
         elif option == 39:
-            self.print_menu()
+            Lang.LanguagePage().menu()
         else:
             print(f"{option} is not supported. Please try again")
             self.menu()
