@@ -76,10 +76,6 @@ class MainMenu:
 
     def main_menu_options(self):
         while True:
-            print("1.) Your Skill Development")
-            print("2.) Your Connections")
-            print("3.) Job/Internship Opportunities")
-            print("\n4.) Exit")
             self.print_menu()
             choice = int(input("\nPlease enter where you would like to navigate: "))
             is_exit = self.selected_menu_option(choice)
@@ -100,7 +96,7 @@ class MainMenu:
     def print_menu(self):
         column_width = 31
         print("\n")
-        menu = [["Log In Page Options", "Useful Links", "Important InCollege Links"],
+        menu = [["Main Menu Options", "Useful Links", "Important InCollege Links"],
                 ["="*column_width, "="*column_width, "="*column_width],
                 ["11.) Your Skill Development", "21.) General", "31.) Copyright Notice"],
                 ["12.) Your Connections", "22.) Browse InCollege", "32.) About"],
