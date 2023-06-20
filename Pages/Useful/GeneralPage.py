@@ -3,6 +3,8 @@ from Pages.Useful.General import AboutPage as About, HelpCenterPage as Help, Pre
 from Pages import LoginPage
 from Util import db_helper as db
 
+from Util import db_helper as db
+import MainMenu as Menu
 
 class GeneralPage:
 

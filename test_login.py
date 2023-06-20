@@ -14,8 +14,9 @@ class TestMenu:
     # Sign-in Functionality Unit Tests
     def test_sign_in_valid_credentials(self, monkeypatch, capsys, mocker):
         # Mocking input to simulate user interaction
-        inputs = ["john", "Password123", "4"]
-        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+        inputs = ["john", "Password123", "14"]
+        if len(inputs) > 0:
+            monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
         user = ["john", "Password123"]
@@ -142,3 +143,30 @@ class TestMenu:
 
         captured = capsys.readouterr()
         assert "Sending you to the main menu navigation" in captured.out
+
+    def test_lang_settings_not_logged_in(self, monkeypatch, capsys, mocker):
+        inputs = ["39", "15"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        # Mocking the get_user method to return a user with matching credentials
+        user = ["john", "Password123"]
+        with mocker.patch.object(db, 'get_user', return_value=user):
+            self.login.menu()
+
+        # Capturing printed output and asserting expected result
+        captured = capsys.readouterr()
+        assert "Please login before trying to edit language settings" in captured.out
+
+    def test_why_join_incollege(self, monkeypatch, capsys, mocker):
+        inputs = ["14", "15"]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        # Mocking the get_user method to return a user with matching credentials
+        user = ["john", "Password123"]
+        with mocker.patch.object(db, 'get_user', return_value=user):
+            self.login.menu()
+
+        # Capturing printed output and asserting expected result
+        captured = capsys.readouterr()
+        assert "* Video is now playing *" in captured.out
+    

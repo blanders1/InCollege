@@ -80,8 +80,8 @@ class MainMenu:
             choice = int(input("\nPlease enter where you would like to navigate: "))
             is_exit = self.selected_menu_option(choice)
             if (choice == 14):
-                 return is_exit
-
+                return self.exit()
+        
     @staticmethod
     def exit():
         print()

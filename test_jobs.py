@@ -17,6 +17,7 @@ class TestJob:
     def test_post_job(self, monkeypatch, capsys, mocker):
         # Mocking input to simulate user interaction
         inputs = ["johnnytest", "Password1!", "13", "1", "Test Title", "Test Desc", "Test Employer", "Test Location", "12345", "9", "14", "14"]
+
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
         # Mocking the get_user method to return a user with matching credentials
         user = ["johnnytest", "Password1!", "John", "Doe"]

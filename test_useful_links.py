@@ -14,7 +14,20 @@ class TestUsefulLinks:
         self.login = LoginPage.Login()
 
     def test_navigation_browse_in_college(self, monkeypatch, capsys, mocker):
-        inputs = [22, 14]
+        inputs = [22, 0, 14]
+        monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
+
+        # Mocking the get_user method to return a user with matching credentials
+        user = ["john", "Password123"]
+        with mocker.patch.object(db, 'get_user', return_value=user):
+            self.menu.main_menu_options()
+
+        # Capturing printed output and asserting expected result
+        captured = capsys.readouterr()
+        assert "under construction" in captured.out
+
+    def test_navigation_business_solutions(self, monkeypatch, capsys, mocker):
+        inputs = [23, 0, 14]
         monkeypatch.setattr('builtins.input', lambda _: inputs.pop(0))
 
         # Mocking the get_user method to return a user with matching credentials
