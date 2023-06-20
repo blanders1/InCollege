@@ -1,6 +1,8 @@
 from Pages.Useful.General import AboutPage as About, HelpCenterPage as Help, PressPage as Press, BlogPage as Blog, \
     CareersPage as Career, DevelopmentPage as Developer
 from Pages import LoginPage
+from Util import db_helper as db
+
 
 class GeneralPage:
 
@@ -19,7 +21,26 @@ class GeneralPage:
 
 
         if choice == 1:
-            LoginPage.Login().menu()
+            if db.is_user_signed_in():
+                print("\n**It seems you are already signed in.**")
+                return self.menu()
+            print("\n1.) Sign In")
+            print("2.) Create Account")
+            print("0.) Return to previous page")
+            option = int(input("Enter option: "))
+            while True:
+                if option != 1 and option !=2 and option != 0:
+                    option = int(input("Invalid input please enter 1, 2, or 0: "))
+                else:
+                    break
+            if option == 1:
+                LoginPage.Login().sign_in()
+            elif option == 2:
+                LoginPage.Login().create_account()
+            elif option == 0:
+                GeneralPage().menu()
+                
+
         elif choice == 2:
             Help.HelpCenterPage().menu()
         elif choice == 3:
@@ -34,6 +55,7 @@ class GeneralPage:
             Developer.DeveloperPage().menu()
         elif choice == 0:
             return
+
         else:
             self.menu()
 
